@@ -18,12 +18,15 @@ pipeline {
     }
   }
   stages {
-    stage('Git clone'){
-      steps {
-        checkout scm
-      }
-    }
+    // stage('Git clone'){
+    //   steps {
+    //     checkout scm
+    //   }
+    // }
     stage('Create docker image') {
+        when {
+            branch 'test'
+        }
       steps {
         container('node') {
           sh """        
