@@ -25,7 +25,7 @@ pipeline {
     // }
     stage('Create docker image') {
         when {
-            branch 'test'
+            branch 'master'
         }
       steps {
         container('node') {
