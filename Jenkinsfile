@@ -24,6 +24,9 @@ pipeline {
       }
     }
     stage('Create docker image') {
+        when {
+            tag "test-*"
+        }
       steps {
         container('node') {
           sh """        
