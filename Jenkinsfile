@@ -28,6 +28,7 @@ pipeline {
             branch 'master'
         }
       steps {
+        echo "test multibranch pipline from branch test"
         container('node') {
           sh """        
             npm config set registry https://lib.matador.ais.co.th/repository/npm/
