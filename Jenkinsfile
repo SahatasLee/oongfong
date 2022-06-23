@@ -47,20 +47,16 @@ pipeline {
     stage('zip') {
         steps {
             script{
-                container('node') {
-                    zip dir: './build', exclude: '', glob: '', zipFile: 'built'
-                }
+                zip dir: './build', exclude: '', glob: '', zipFile: 'built'
             }
         }
     }
     stage('publish'){
         steps {
-            container('node'){
             nexusPublisher nexusInstanceId: 'devops-releases', 
             nexusRepositoryId: 'devops-releases', 
             packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './built']], 
             mavenCoordinate: [artifactId: 'frontend', groupId: 'devops.frontend', packaging: 'zip', version: '1.0.0-20220613']]]
-            }
         }
     }
   }
