@@ -36,14 +36,13 @@ pipeline {
       }
     }
     stage('npm build') {
-            steps {
-                container('node') 
-                {
-                    echo 'npm build'
-                    sh 'npm run build'
-                }
+        steps {
+            container('node') {
+                echo 'npm build'
+                sh 'npm run build'
             }
         }
+    }
     stage('zip') {
         steps {
             script{
