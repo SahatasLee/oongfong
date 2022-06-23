@@ -25,7 +25,7 @@ pipeline {
     // }
     stage('Create docker image') {
         when {
-            branch 'master'
+            branch 'test'
         }
       steps {
         echo "test multibranch pipline from branch test"
