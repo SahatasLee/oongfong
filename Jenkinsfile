@@ -29,6 +29,7 @@ pipeline {
         }
       steps {
         container('node') {
+            echo 'test tag 001'
           sh """        
             npm config set registry https://lib.matador.ais.co.th/repository/npm/
             npm install --verbose
