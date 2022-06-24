@@ -35,6 +35,9 @@ pipeline {
       }
     }
     stage('npm build') {
+        when {
+        tag "prod-*"
+        }
         steps {
             container('node') {
                 echo 'npm build'
@@ -43,6 +46,9 @@ pipeline {
         }
     }
     stage('zip') {
+        when {
+        tag "prod-*"
+        }
         steps {
             script{
                 zip dir: './build', exclude: '', glob: '', zipFile: 'built'
