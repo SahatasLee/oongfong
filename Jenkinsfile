@@ -18,11 +18,6 @@ pipeline {
     }
   }
   stages {
-    stage('Git clone'){
-      steps {
-        checkout scm
-      }
-    }
     stage('Create docker image') {
       when {
         tag "test-*"
