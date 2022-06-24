@@ -49,7 +49,7 @@ pipeline {
 						sh '''
 						    docker --version
 						    docker images
-                            docker build -t dockerhub1.matador.ais.co.th/devops/frontend-nut:1.0.0 .
+                            docker build -t dockerhub1.matador.ais.co.th/nut/frontend-nut:1.0.0 .
 						'''
 					}
 				}
@@ -62,7 +62,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'repo1-nut', passwordVariable: 'password', usernameVariable: 'username')]){                        
 						sh '''
 						    docker login dockerhub1.matador.ais.co.th -u ${username} -p ${password}
-                            docker push dockerhub1.matador.ais.co.th/devops/frontend-nut:1.0.0
+                            docker push dockerhub1.matador.ais.co.th/nut/frontend-nut:1.0.0
                             docker logout dockerhub1.matador.ais.co.th
 						'''
                         }
