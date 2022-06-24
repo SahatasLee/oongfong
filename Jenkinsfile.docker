@@ -1,0 +1,59 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            spec:
+                containers:
+                  - name: docker-daemon
+                    image: docker:stable-dind
+                    alwaysPullImage: false
+                    securityContext:
+                      privileged: true
+                    env:
+                    - name: DOCKER_TLS_CERTDIR
+                      value: ""
+                    volumeMounts:
+                    - name: docker-volume
+                      mountPath: /var/lib/docker
+                      subpath: k8s-example
+                  - name: docker
+                    image: docker
+                    alwaysPullImage: false
+                    command:
+                    - cat
+                    tty: true
+                    env:
+                    - name: DOCKER_HOST
+                      value: tcp://localhost:2375
+                volumes:
+                    - name: docker-volume
+                      emptyDir: {}
+            """
+        }
+    }
+    stages {
+		stage ('Checkout & Git Clone') {
+			steps {
+				// script {
+                //     git branch: 'master', credentialsId: '', url: 'https://git.matador.ais.co.th/devops/landing-page.git'        
+				// }
+                checkout scm
+			}
+		}
+		stage('Build image') {
+			steps {
+				script {
+					container('docker') {
+						sh '''
+						    docker --version
+						    docker images
+                            docker build -t frontend-nut:1.0.0 .
+						'''
+					}
+				}
+			}
+		}
+    }
+}
