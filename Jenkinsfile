@@ -63,7 +63,7 @@ pipeline {
             nexusPublisher nexusInstanceId: 'devops-releases', 
             nexusRepositoryId: 'devops-releases', 
             packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './built']], 
-            mavenCoordinate: [artifactId: 'frontend', groupId: 'devops.frontend', packaging: 'zip', version: '1.0.${TAG_NAME}-20220613']]]
+            mavenCoordinate: [artifactId: 'frontend', groupId: 'devops.frontend', packaging: 'zip', version: '${TAG_NAME}-${BUILD_TIMESTAMP}']]]
         }
     }
     stage('Test npm install') {
