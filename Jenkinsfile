@@ -24,12 +24,12 @@ pipeline {
       }
     }
     stage('Create docker image') {
-        when {
-            tag "test-*"
-        }
+      when {
+        tag "test-*"
+      }
       steps {
         container('node') {
-            echo 'test tag 003'
+            echo 'test tag 004'
           sh """        
             npm config set registry https://lib.matador.ais.co.th/repository/npm/
             npm install --verbose
